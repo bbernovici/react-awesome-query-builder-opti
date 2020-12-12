@@ -19,11 +19,17 @@ export default class SelectWidget extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {buildOptions: false}
     useOnPropsChanged(this);
+    this.setOptions(props)
     this.onPropsChanged(props);
   }
 
   onPropsChanged (props) {
+    
+  }
+
+  setOptions (props) {
     const {listValues} = props;
 
     let optionsMaxWidth = 0;
@@ -35,6 +41,18 @@ export default class SelectWidget extends PureComponent {
     this.options = mapListValues(listValues, ({title, value}) => {
       return (<Option key={value+""} value={value+""}>{title}</Option>);
     });
+  }
+
+  handleDropdownOpen = (open) => {
+    if (open) {
+      this.setState(state => ({
+        buildOptions: true
+      }));
+    } else {
+      this.setState(state => ({
+        buildOptions: false
+      }));
+    }
   }
 
   handleChange = (val) => {
@@ -59,14 +77,14 @@ export default class SelectWidget extends PureComponent {
         disabled={readonly}
         style={{ width }}
         key={"widget-select"}
-        dropdownMatchSelectWidth={false}
+        onDropdownVisibleChange={this.handleDropdownOpen}
         placeholder={placeholder}
         size={renderSize}
         value={_value}
         onChange={this.handleChange}
         filterOption={this.filterOption}
         {...customProps}
-      >{this.options}
+      >{this.state.buildOptions && this.options}
       </Select>
     );
   }

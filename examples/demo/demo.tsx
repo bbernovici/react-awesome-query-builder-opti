@@ -138,33 +138,33 @@ export default class DemoQueryBuilder extends Component<{}, DemoQueryBuilderStat
           <div>
           stringFormat: 
             <pre style={preStyle}>
-              {stringify(queryString(immutableTree, config), undefined, 2)}
+              {/* {stringify(queryString(immutableTree, config), undefined, 2)} */}
             </pre>
           </div>
           <hr/>
           <div>
           humanStringFormat: 
             <pre style={preStyle}>
-              {stringify(queryString(immutableTree, config, true), undefined, 2)}
+              {/* {stringify(queryString(immutableTree, config, true), undefined, 2)} */}
             </pre>
           </div>
           <hr/>
           <div>
           sqlFormat: 
             <pre style={preStyle}>
-              {stringify(sqlFormat(immutableTree, config), undefined, 2)}
+              {/* {stringify(sqlFormat(immutableTree, config), undefined, 2)} */}
             </pre>
           </div>
           <hr/>
           <div>
           mongodbFormat: 
             <pre style={preStyle}>
-              {stringify(mongodbFormat(immutableTree, config), undefined, 2)}
+              {/* {stringify(mongodbFormat(immutableTree, config), undefined, 2)} */}
             </pre>
           </div>
           <hr/>
           <div>
-            <a href="http://jsonlogic.com/play.html" target="_blank" rel="noopener noreferrer">jsonLogicFormat</a>: 
+            {/* <a href="http://jsonlogic.com/play.html" target="_blank" rel="noopener noreferrer">jsonLogicFormat</a>: 
             { errors.length > 0 
               && <pre style={preErrorStyle}>
                 {stringify(errors, undefined, 2)}
@@ -179,7 +179,7 @@ export default class DemoQueryBuilder extends Component<{}, DemoQueryBuilderStat
                 {"// Data"}:<br />
                 {stringify(data, undefined, 2)}
               </pre>
-            }
+            } */}
           </div>
           <hr/>
           <div>

@@ -1,6 +1,7 @@
 "use strict";
 import last from "lodash/last";
 import merge from "lodash/merge";
+import omitBy from "lodash/omitBy";
 import mergeWith from "lodash/mergeWith";
 import {settings as defaultSettings} from "../config/default";
 import moment from "moment";
@@ -254,11 +255,13 @@ export const getFieldConfig = (field, config) => {
 
   //merge, but don't merge operators (rewrite instead)
   const typeConfig = config.types[fieldConfig.type] || {};
-  let ret = mergeWith({}, typeConfig, fieldConfig || {}, (objValue, srcValue, _key, _object, _source, _stack) => {
+  const fieldConfigOmitted = omitBy(fieldConfig, (value, key) => key.includes("fieldSettings"))
+  let ret = mergeWith({}, typeConfig, fieldConfigOmitted || {}, (objValue, srcValue, _key, _object, _source, _stack) => {
     if (Array.isArray(objValue)) {
       return srcValue;
     }
   });
+  ret.fieldSettings = fieldConfig.fieldSettings;
 
   return ret;
 };
@@ -331,6 +334,7 @@ export const getOperatorConfig = (config, operator, field = null) => {
   const opConfig = config.operators[operator];
   if (field) {
     const fieldConfig = getFieldConfig(field, config);
+    // console.log(config);
     const widget = getWidgetForFieldOp(config, field, operator);
     const widgetConfig = config.widgets[widget] || {};
     const fieldWidgetConfig = (fieldConfig && fieldConfig.widgets ? fieldConfig.widgets[widget] : {}) || {};

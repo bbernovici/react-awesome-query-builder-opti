@@ -21,17 +21,23 @@ export default class MultiSelectWidget extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {buildOptions: false}
     useOnPropsChanged(this);
+    this.setOptions(props)
     this.onPropsChanged(props);
   }
 
   onPropsChanged (props) {
+  
+  }
+
+  setOptions (props) {
     const {listValues} = props;
 
     let optionsMaxWidth = 0;
-    mapListValues(listValues, ({title, value}) => {
-      optionsMaxWidth = Math.max(optionsMaxWidth, calcTextWidth(title, null));
-    });
+    // mapListValues(listValues, ({title, value}) => {
+    //   optionsMaxWidth = Math.max(optionsMaxWidth, calcTextWidth(title, null));
+    // });
     this.optionsMaxWidth = optionsMaxWidth;
 
     this.options = mapListValues(listValues, ({title, value}) => {
@@ -40,9 +46,22 @@ export default class MultiSelectWidget extends PureComponent {
   }
 
   handleChange = (val) => {
-    if (val && !val.length)
+    if (val && !val.length) {
       val = undefined; //not allow []
+    } 
     this.props.setValue(val);
+  }
+
+  handleDropdownOpen = (open) => {
+    if (open) {
+      this.setState(state => ({
+        buildOptions: true
+      }));
+    } else {
+      this.setState(state => ({
+        buildOptions: false
+      }));
+    }
   }
 
   filterOption = (input, option) => {
@@ -63,22 +82,22 @@ export default class MultiSelectWidget extends PureComponent {
         disabled={readonly}
         mode={allowCustomValues ? "tags" : "multiple"}
         style={{
-          minWidth: width,
+          minWidth: width+200,
           width: width,
         }}
         dropdownStyle={{
           width: dropdownWidth,
         }}
+        onDropdownVisibleChange={this.handleDropdownOpen}
         key={"widget-multiselect"}
-        dropdownMatchSelectWidth={false}
         placeholder={placeholder}
         size={renderSize}
         value={_value}
         onChange={this.handleChange}
         filterOption={this.filterOption}
         {...customProps}
-      >{this.options}
+      >{this.state.buildOptions && this.options}
       </Select>
     );
-  }
+  } 
 }
