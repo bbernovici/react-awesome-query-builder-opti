@@ -1,6 +1,6 @@
 {
-  "name": "react-awesome-query-builder",
-  "version": "3.0.0",
+  "name": "react-awesome-query-builder-opti",
+  "version": "3.0.1",
   "description": "User-friendly query builder for React. Demo: https://ukrbublik.github.io/react-awesome-query-builder",
   "keywords": [
     "query-builder",
@@ -39,12 +39,12 @@
     "sandbox_js": "cd sandbox_simple && npm i && npm start",
     "start": "npm i && npm run examples",
     "test": "karma start karma.conf.js",
-    "lint-fix": "./node_modules/.bin/eslint --ext .jsx --ext .js --ext .tsx --fix ./modules/ ./sandbox/ ./sandbox_simple/ ./examples/ ./tests/",
-    "lint": "./node_modules/.bin/eslint --ext .jsx --ext .js --ext .tsx ./modules/ ./sandbox/ ./sandbox_simple/ ./examples/ ./tests/"
+    "lint-fix": "eslint --ext .jsx --ext .js --ext .tsx --fix ./modules/ ./sandbox/ ./sandbox_simple/ ./examples/ ./tests/",
+    "lint": "eslint --ext .jsx --ext .js --ext .tsx ./modules/ ./sandbox/ ./sandbox_simple/ ./examples/ ./tests/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ukrbublik/react-awesome-query-builder.git"
+    "url": "https://github.com/bbernovici/react-awesome-query-builder-opti.git"
   },
   "author": "Denis Oblogin <ukrbublik@gmail.com> (https://github.com/ukrbublik)",
   "license": "MIT",
@@ -148,5 +148,10 @@
     "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.0"
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "tests"
   }
 }
