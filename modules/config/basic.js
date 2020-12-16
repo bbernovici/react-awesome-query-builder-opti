@@ -795,6 +795,8 @@ const types = {
       },
       multiselect: {
         operators: [
+          "multiselect_equals",
+          "multiselect_not_equals",
           "select_any_in",
           "select_not_any_in"
         ],
